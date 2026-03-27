@@ -1,9 +1,3 @@
-from flask import Flask, jsonify
-
-app = Flask(__name__)
-
-@app.route("/api")
+@app.route('/')
 def home():
-    return jsonify({
-        "status": "WORKING 🚀"
-    })
+    return "Hack AI is running 🚀"
