@@ -7,7 +7,7 @@ GEMINI_API_KEY = os.getenv("GEMINI_API_KEY")
 
 # 🧠 Create Gemini model via ADK
 model = GeminiModel(
-    model="gemini-2.5-flash",
+    model="models/gemini-2.5-flash",
     api_key=GEMINI_API_KEY
 )
 
