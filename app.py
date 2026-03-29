@@ -12,25 +12,15 @@ def home():
 
 @app.route('/chat', methods=['POST'])
 def chat():
-    try:
-        data = request.get_json()
+    data = request.get_json()
+    user_input = data.get("message")
 
-        if not data or "message" not in data:
-            return jsonify({"error": "Message is required"}), 400
+    # 🔥 NO try-except (we want real error)
+    response = run_agent(user_input)
 
-        user_input = data["message"]
-
-        response = run_agent(user_input)
-
-        return jsonify({
-            "response": response
-        })
-
-    except Exception as e:
-        return jsonify({
-            "error": str(e)
-        }), 500
-
+    return jsonify({
+        "response": response
+    })
 
 if __name__ == "__main__":
     app.run(debug=True)

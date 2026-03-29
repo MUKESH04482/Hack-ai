@@ -20,5 +20,19 @@ Be concise and precise.
 )
 
 def run_agent(message: str):
-    response = root_agent.run(message)
-    return str(response)
+    try:
+        response = root_agent.run(message)
+
+        # 🔥 Handle ADK output safely
+        if response is None:
+            return "No response from agent"
+
+        if hasattr(response, "output"):
+            return response.output
+        elif hasattr(response, "text"):
+            return response.text
+        else:
+            return str(response)
+
+    except Exception as e:
+        return f"ERROR: {str(e)}"
