@@ -1,32 +1,20 @@
-from google.adk.agents import Agent
+from google.adk.agents import LlmAgent
 import os
 
-# ADK automatically uses Gemini via API key
-# Just ensure GEMINI_API_KEY is set in Render
+# Ensure API key exists
+if not os.getenv("GEMINI_API_KEY"):
+    raise ValueError("Missing GEMINI_API_KEY")
 
-root_agent = Agent(
-    name="research_assistant",
+# ✅ Proper ADK agent
+root_agent = LlmAgent(
     model="gemini-2.5-flash",
-    description="Elite research assistant delivering precise, structured insights",
-    instruction="""
-You are an elite AI research assistant.
-
-Give:
-1. Direct Answer
-2. Key Insights
-3. Practical Takeaways
-
-Be concise and precise.
-"""
+    instruction="Give clear and structured answers"
 )
 
 def run_agent(message: str):
     try:
-        response = root_agent.invoke({"input": message})
-        return str(response)
-    
+        result = root_agent.run(message)   # ✅ THIS is correct for LlmAgent
+        return str(result)
     except Exception as e:
         print("AGENT ERROR:", str(e))
         return f"Error: {str(e)}"
-
-   
