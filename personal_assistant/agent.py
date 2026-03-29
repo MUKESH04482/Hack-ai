@@ -1,13 +1,14 @@
+# personal_assistant/agent.py
+
 import google.generativeai as genai
 import os
 
-# ✅ Configure Gemini API
+# Configure Gemini API
 genai.configure(api_key=os.getenv("GEMINI_API_KEY"))
 
 
-# ✅ Custom Agent class (replacement for google.adk.Agent)
 class Agent:
-    def _init_(self, name, model, description, instruction):
+    def __init__(self, name, model, description, instruction):
         self.name = name
         self.model_name = model
         self.description = description
@@ -20,7 +21,7 @@ class Agent:
         return response.text
 
 
-# ✅ Your original agent (UNCHANGED LOGIC)
+# 🚀 Your Elite AI Agent (FULL ORIGINAL PROMPT)
 root_agent = Agent(
     name="research_assistant",
     model="gemini-1.5-flash",
@@ -71,3 +72,8 @@ If unclear query:
 - Ask a sharp clarification question instead of guessing
 """
 )
+
+
+# 🔗 Bridge function for Flask
+def run_agent(message):
+    return root_agent.run(message)
