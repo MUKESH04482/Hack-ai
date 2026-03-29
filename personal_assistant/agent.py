@@ -1,30 +1,20 @@
-# personal_assistant/agent.py
-
-import google.generativeai as genai
+from google.adk.agents import Agent
+from google.adk.models import GeminiModel
 import os
 
-# Configure Gemini API
-genai.configure(api_key=os.getenv("GEMINI_API_KEY"))
+# 🔑 Load API Key
+GEMINI_API_KEY = os.getenv("GEMINI_API_KEY")
 
+# 🧠 Create Gemini model via ADK
+model = GeminiModel(
+    model="gemini-2.5-flash",
+    api_key=GEMINI_API_KEY
+)
 
-class Agent:
-    def __init__(self, name, model, description, instruction):
-        self.name = name
-        self.model_name = model
-        self.description = description
-        self.instruction = instruction
-        self.model = genai.GenerativeModel(self.model_name)
-
-    def run(self, input_text: str):
-        prompt = f"{self.instruction}\n\nUser Query:\n{input_text}"
-        response = self.model.generate_content(prompt)
-        return response.text
-
-
-# 🚀 Your Elite AI Agent (FULL ORIGINAL PROMPT)
+# 🚀 Your Elite AI Agent (ADK-based)
 root_agent = Agent(
     name="research_assistant",
-    model="models/gemini-2.5-flash",
+    model=model,
     description="Elite research assistant delivering precise, structured, and high-signal insights",
     instruction="""
 You are an elite, top 1% AI research assistant designed to outperform typical chatbots.
@@ -73,7 +63,7 @@ If unclear query:
 """
 )
 
-
 # 🔗 Bridge function for Flask
-def run_agent(message):
-    return root_agent.run(message)
+def run_agent(message: str):
+    response = root_agent.run(message)
+    return response
