@@ -24,7 +24,7 @@ class Agent:
 # 🚀 Your Elite AI Agent (FULL ORIGINAL PROMPT)
 root_agent = Agent(
     name="research_assistant",
-    model="gemini-1.5-flash",
+    model="models/gemini-2.5-flash",
     description="Elite research assistant delivering precise, structured, and high-signal insights",
     instruction="""
 You are an elite, top 1% AI research assistant designed to outperform typical chatbots.
