@@ -64,9 +64,7 @@
       border-radius: 12px;
       margin-bottom: 15px;
       box-shadow: 0 4px 15px rgba(0,0,0,0.3);
-      opacity: 0;
-      transform: translateY(10px);
-      animation: fadeIn 0.5s forwards;
+      animation: fadeIn 0.5s ease-in-out;
     }
 
     .card h3 {
@@ -75,10 +73,8 @@
     }
 
     @keyframes fadeIn {
-      to {
-        opacity: 1;
-        transform: translateY(0);
-      }
+      from { opacity: 0; transform: translateY(10px); }
+      to { opacity: 1; transform: translateY(0); }
     }
 
     .loader {
@@ -100,6 +96,11 @@
 
     @keyframes spin {
       100% { transform: rotate(360deg); }
+    }
+
+    .error {
+      color: #ef4444;
+      text-align: center;
     }
 
     @media (max-width: 600px) {
@@ -125,24 +126,30 @@ async function analyze() {
   loader.style.display = "block";
 
   try {
-    const res = await fetch("/api", {
+    const res = await fetch("/chat", {
       method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ query })
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify({
+        message: query   // ✅ matches backend
+      })
     });
 
     const data = await res.json();
 
     loader.style.display = "none";
 
-    renderCard("📌 Direct Answer", data.answer);
-    renderCard("💡 Key Insights", data.insights);
-    renderCard("🔍 Deep Analysis", data.analysis);
-    renderCard("✅ Practical Takeaways", data.takeaways);
+    const fullText = data.response || "No response received";
+
+    renderCard("📌 Direct Answer", fullText);
+    renderCard("💡 Key Insights", fullText);
+    renderCard("🔍 Deep Analysis", fullText);
+    renderCard("✅ Practical Takeaways", fullText);
 
   } catch (err) {
     loader.style.display = "none";
-    output.innerHTML = "<p>Error connecting to server</p>";
+    output.innerHTML = "<p class='error'>Error connecting to server</p>";
   }
 }
 
