@@ -1,4 +1,4 @@
-from google.adk.agents import LlmAgent
+from google.adk.agents import Agent
 import os
 
 # Ensure API key exists
@@ -7,7 +7,7 @@ if not os.getenv("GOOGLE_API_KEY"):
 
 # ✅ Proper ADK agent
 
-root_agent = LlmAgent(
+root_agent = Agent(
     name="research_assistant",   # ✅ REQUIRED
     model="models/gemini-2.5-flash",  # ✅ correct format
     instruction="Give clear and structured answers"
