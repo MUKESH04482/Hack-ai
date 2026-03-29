@@ -6,7 +6,5 @@ app = Flask(__name__)
 def home():
     return "Hack AI is running 🚀"
 
-@app.route('/api')
-def api():
-    return {"status": "WORKING 🚀"}
-
+if __name__ == "__main__":
+    app.run(debug=True)
