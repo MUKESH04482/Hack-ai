@@ -6,6 +6,7 @@ import os
 
 root_agent = Agent(
     name="research_assistant",
+    model="gemini-2.5-flash",
     description="Elite research assistant delivering precise, structured insights",
     instruction="""
 You are an elite AI research assistant.
