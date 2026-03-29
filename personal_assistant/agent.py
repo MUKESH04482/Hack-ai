@@ -1,28 +1,24 @@
 from google.adk.agents import Agent
-import google.generativeai as genai
 import os
 
-# 🔑 Configure Gemini
-genai.configure(api_key=os.getenv("GEMINI_API_KEY"))
+# ADK automatically uses Gemini via API key
+# Just ensure GEMINI_API_KEY is set in Render
 
-# 🚀 ADK Agent (structure requirement satisfied)
 root_agent = Agent(
     name="research_assistant",
-    description="Elite research assistant delivering structured insights",
+    description="Elite research assistant delivering precise, structured insights",
     instruction="""
 You are an elite AI research assistant.
 
-Respond with:
-1. DIRECT ANSWER
-2. KEY INSIGHTS
-3. PRACTICAL TAKEAWAYS
+Give:
+1. Direct Answer
+2. Key Insights
+3. Practical Takeaways
 
-Be precise, structured, and useful.
+Be concise and precise.
 """
 )
 
-# 🔗 Bridge function (actual Gemini execution)
 def run_agent(message: str):
-    model = genai.GenerativeModel("models/gemini-2.5-flash")
-    response = model.generate_content(message)
-    return response.text
+    response = root_agent.run(message)
+    return str(response)
