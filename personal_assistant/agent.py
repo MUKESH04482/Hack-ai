@@ -21,18 +21,11 @@ Be concise and precise.
 
 def run_agent(message: str):
     try:
-        response = root_agent.run(message)
-
-        # 🔥 Handle ADK output safely
-        if response is None:
-            return "No response from agent"
-
-        if hasattr(response, "output"):
-            return response.output
-        elif hasattr(response, "text"):
-            return response.text
-        else:
-            return str(response)
-
+        response = root_agent.invoke({"input": message})
+        return str(response)
+    
     except Exception as e:
-        return f"ERROR: {str(e)}"
+        print("AGENT ERROR:", str(e))
+        return f"Error: {str(e)}"
+
+   
