@@ -2,8 +2,8 @@ from google.adk.agents import LlmAgent
 import os
 
 # Ensure API key exists
-if not os.getenv("GEMINI_API_KEY"):
-    raise ValueError("Missing GEMINI_API_KEY")
+if not os.getenv("GOOGLE_API_KEY"):
+    raise ValueError("Missing GOOGLE_API_KEY")
 
 # ✅ Proper ADK agent
 root_agent = LlmAgent(
