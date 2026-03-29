@@ -6,8 +6,10 @@ if not os.getenv("GOOGLE_API_KEY"):
     raise ValueError("Missing GOOGLE_API_KEY")
 
 # ✅ Proper ADK agent
+
 root_agent = LlmAgent(
-    model="gemini-2.5-flash",
+    name="research_assistant",   # ✅ REQUIRED
+    model="models/gemini-2.5-flash",  # ✅ correct format
     instruction="Give clear and structured answers"
 )
 
