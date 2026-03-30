@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 # ADK Gemini Agent — Render Deployment Guide
 
 ## Project Structure
@@ -116,3 +117,6 @@ export GOOGLE_API_KEY="your_key_here"
 python main.py
 # Visit http://localhost:10000
 ```
+=======
+# Hack-ai
+>>>>>>> fc4eb2d2deddb55b1507052aa86b44113de60d93
