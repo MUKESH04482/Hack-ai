@@ -1,5 +1,8 @@
+import os
 from google.adk.agents import Agent
- 
+
+# Explicitly set API key
+os.environ.get("GOOGLE_API_KEY")
 # Define a simple tool for the agent
 def summarize_text(text: str) -> dict:
     """
