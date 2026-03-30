@@ -5,4 +5,4 @@ uvicorn[standard]==0.29.0
 pydantic==2.7.1
 deprecated==1.2.14
 fastapi>=0.115.0
-PYTHON_VERSION = 3.11.0
+PYTHON_VERSION = 3.14.3
